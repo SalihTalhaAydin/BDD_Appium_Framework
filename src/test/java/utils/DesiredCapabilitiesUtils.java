@@ -1,4 +1,4 @@
-package mobile.utils;
+package utils;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
@@ -30,10 +30,10 @@ public class DesiredCapabilitiesUtils {
 
     public static AndroidDriver<AndroidElement> setupAndroidDesiredCapabilities() throws MalformedURLException {
         if (androidDriver == null) {
-            File appFile = new File(ConfigReader.getProperty("apkAppPath")); //stores the app path
             DesiredCapabilities desiredCapabilities = new DesiredCapabilities(); // setting up the mobile device with below values
             desiredCapabilities.setCapability("deviceName", ConfigReader.getProperty("deviceName"));
             desiredCapabilities.setCapability("platformName", ConfigReader.getProperty("platformName"));
+            File appFile = new File(ConfigReader.getProperty("apkAppPath")); //stores the app path
             desiredCapabilities.setCapability("app", appFile.getAbsolutePath()); // absolute path not content root
             URL appiumServerUrl = new URL("http://0.0.0.0:4723/wd/hub"); // server url comes in here
             androidDriver = new AndroidDriver<>(appiumServerUrl, desiredCapabilities);
