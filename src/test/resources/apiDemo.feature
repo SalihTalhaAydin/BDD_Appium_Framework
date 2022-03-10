@@ -40,3 +40,14 @@ Feature: Api Demo Application
   Scenario: Get text of button with ui automator and index
     Given user gets text of Views option
     Then user validates that it is "Views"
+
+  @tapToElement1
+  Scenario: Tap to Graphics and Validate Arcs is visible
+    Given user taps on "Graphics"
+    Then user validates that "Arcs" is visible
+
+  @tapToElement2
+  Scenario: Tap to Animation
+    Given user taps on "Animations"
+    When user taps on "Custom Evaluator"
+    Then user should see Play Button

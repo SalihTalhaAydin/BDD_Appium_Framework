@@ -4,6 +4,7 @@ import io.appium.java_client.android.AndroidElement;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import utils.MobileCommonUtils;
 
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.List;
 
 import static stepDefinitions.Hooks.*;
 import static org.junit.Assert.*;
+import static utils.MobileCommonUtils.*;
 
 public class ApiDemoStepDefinitions {
     String actualAccessibilityText;
@@ -89,5 +91,20 @@ public class ApiDemoStepDefinitions {
     @Given("user gets text of Views option")
     public void userGetsTextOfViewsOption() {
         actualViewText = apiDemoHomePage.viewOption.getText();
+    }
+
+    @Given("user taps on {string}")
+    public void userTapsOn(String optionText) {
+        tapByElement(androidDriver, elementByText(androidDriver, optionText));
+    }
+
+    @Then("user validates that {string} is visible")
+    public void userValidatesThatIsVisible(String expectedArcsText) {
+        assertEquals(expectedArcsText, apiDemoGraphicsPage.arcsOption.getText());
+    }
+
+    @Then("user should see Play Button")
+    public void userShouldSeePlayButton() {
+        assertTrue(apiDemoCustomEvaluator.playButton.isDisplayed());
     }
 }

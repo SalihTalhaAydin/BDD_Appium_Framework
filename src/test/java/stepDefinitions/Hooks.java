@@ -15,6 +15,8 @@ public class Hooks {
     public static WebDriver webDriver;
 
     public static ApiDemoHomePage apiDemoHomePage;
+    public static ApiDemoGraphicsPage apiDemoGraphicsPage;
+    public static ApiDemoCustomEvaluator apiDemoCustomEvaluator;
 
     @Before
     public void setup() throws Exception{
@@ -22,6 +24,8 @@ public class Hooks {
             case "app":
                 androidDriver = DesiredCapabilitiesUtils.setupAndroidDesiredCapabilities();
                 apiDemoHomePage = new ApiDemoHomePage(androidDriver);
+                apiDemoGraphicsPage = new ApiDemoGraphicsPage(androidDriver);
+                apiDemoCustomEvaluator = new ApiDemoCustomEvaluator(androidDriver);
                 break;
             case "browser":
                 webDriver = DesiredCapabilitiesUtils.setupWebDriverDesiredCapabilities();
