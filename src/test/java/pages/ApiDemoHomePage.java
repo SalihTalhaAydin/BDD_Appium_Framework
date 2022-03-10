@@ -19,4 +19,14 @@ public class ApiDemoHomePage {
 
     @AndroidFindBy (id = "android:id/text1") // resource id
     public List<AndroidElement> allOptions;
+
+    @AndroidFindBy(className = "android.widget.TextView")
+    public List<AndroidElement> allElements;
+
+    @AndroidFindBy(xpath = "//android.widget.TextView[@content-desc=\"Graphics\"]")
+    public AndroidElement graphicsOption;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Media\")")
+    public AndroidElement mediaOption;
+
 }
