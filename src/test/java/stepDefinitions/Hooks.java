@@ -25,6 +25,7 @@ public class Hooks {
                 break;
             case "browser":
                 webDriver = DesiredCapabilitiesUtils.setupWebDriverDesiredCapabilities();
+
                 break;
             default:
                 throw new Exception("Testing value does NOT come from configuration.properties!");

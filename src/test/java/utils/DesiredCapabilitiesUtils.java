@@ -3,12 +3,9 @@ package utils;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import utils.ConfigReader;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -31,13 +28,18 @@ public class DesiredCapabilitiesUtils {
     public static AndroidDriver<AndroidElement> setupAndroidDesiredCapabilities() throws MalformedURLException {
         if (androidDriver == null) {
             DesiredCapabilities desiredCapabilities = new DesiredCapabilities(); // setting up the mobile device with below values
+
             desiredCapabilities.setCapability("deviceName", ConfigReader.getProperty("deviceName"));
             desiredCapabilities.setCapability("platformName", ConfigReader.getProperty("platformName"));
-            File appFile = new File(ConfigReader.getProperty("apkAppPath")); //stores the app path
-            desiredCapabilities.setCapability("app", appFile.getAbsolutePath()); // absolute path not content root
+            desiredCapabilities.setCapability("app", new File(ConfigReader.getProperty("apkAppPath")).getAbsolutePath()); // absolute path not content root
+
             URL appiumServerUrl = new URL("http://0.0.0.0:4723/wd/hub"); // server url comes in here
+
             androidDriver = new AndroidDriver<>(appiumServerUrl, desiredCapabilities);
-            androidDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            androidDriver.manage().timeouts().implicitlyWait(
+                    Long.parseLong(ConfigReader.getProperty("implicitlyWaitTime")),
+                    TimeUnit.SECONDS
+            );
         }
         return androidDriver;
     }
