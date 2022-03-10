@@ -29,4 +29,6 @@ public class ApiDemoHomePage {
     @AndroidFindBy(uiAutomator = "new UiSelector().description(\"Media\")")
     public AndroidElement mediaOption;
 
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.TextView\").index(10)")
+    public AndroidElement viewOption;
 }

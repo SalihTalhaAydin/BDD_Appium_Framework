@@ -35,3 +35,8 @@ Feature: Api Demo Application
   Scenario: Get text of button with ui automator and content-desc
     Given user gets text of Media option
     Then user validates that it is "Media"
+
+  @ValidateTextWithUIAutomatorAndIndex
+  Scenario: Get text of button with ui automator and index
+    Given user gets text of Views option
+    Then user validates that it is "Views"

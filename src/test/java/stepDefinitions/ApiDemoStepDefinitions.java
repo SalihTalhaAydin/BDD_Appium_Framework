@@ -16,6 +16,7 @@ public class ApiDemoStepDefinitions {
     String actualAccessibilityText;
     String actualGraphicsText;
     String actualMediaText;
+    String actualViewText;
     List<String> actualAllOptionTexts;
     int actualSize;
 
@@ -66,6 +67,9 @@ public class ApiDemoStepDefinitions {
             case "Media":
                 assertEquals(expectedOptionText, actualMediaText);
                 break;
+            case "Views":
+                assertEquals(expectedOptionText, actualViewText);
+                break;
             default:
                 throw new Exception("Element does not exist!!!");
         }
@@ -80,5 +84,10 @@ public class ApiDemoStepDefinitions {
     @Then("user validates that it is equal to {string}")
     public void userValidatesThatItIsEqualTo(String expectedMediaText) {
         assertEquals(expectedMediaText, actualMediaText);
+    }
+
+    @Given("user gets text of Views option")
+    public void userGetsTextOfViewsOption() {
+        actualViewText = apiDemoHomePage.viewOption.getText();
     }
 }
