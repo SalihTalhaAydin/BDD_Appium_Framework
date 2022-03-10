@@ -48,6 +48,6 @@ Feature: Api Demo Application
 
   @tapToElement2
   Scenario: Tap to Animation
-    Given user taps on "Animations"
+    Given user taps on "Animation"
     When user taps on "Custom Evaluator"
     Then user should see Play Button
