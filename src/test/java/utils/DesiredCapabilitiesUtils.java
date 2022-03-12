@@ -33,9 +33,8 @@ public class DesiredCapabilitiesUtils {
             desiredCapabilities.setCapability("platformName", ConfigReader.getProperty("platformName"));
             desiredCapabilities.setCapability("app", new File(ConfigReader.getProperty("apkAppPath")).getAbsolutePath()); // absolute path not content root
 
-            URL appiumServerUrl = new URL("http://0.0.0.0:4723/wd/hub"); // server url comes in here
-
-            androidDriver = new AndroidDriver<>(appiumServerUrl, desiredCapabilities);
+            // server url comes in here
+            androidDriver = new AndroidDriver<>(new URL("http://0.0.0.0:4723/wd/hub"), desiredCapabilities);
             androidDriver.manage().timeouts().implicitlyWait(
                     Long.parseLong(ConfigReader.getProperty("implicitlyWaitTime")),
                     TimeUnit.SECONDS
@@ -46,19 +45,18 @@ public class DesiredCapabilitiesUtils {
 
     public static WebDriver setupWebDriverDesiredCapabilities() throws MalformedURLException {
         if (webDriver == null) {
-            File appFile = new File(ConfigReader.getProperty("chromeDriverPath")); //stores the app path
+
             DesiredCapabilities desiredCapabilities = new DesiredCapabilities(); // setting up the mobile device with below values
+
             desiredCapabilities.setCapability("deviceName", ConfigReader.getProperty("deviceName"));
             desiredCapabilities.setCapability("platformName", ConfigReader.getProperty("platformName"));
-            desiredCapabilities.setCapability(CapabilityType.BROWSER_NAME, ConfigReader.getProperty("browser"));
-            desiredCapabilities.setCapability("chromedriverExecutableDir", appFile.getAbsolutePath());/**/
-            // System.out.println(appFile.getAbsolutePath());
-            // desiredCapabilities.setCapability("appPackage", "com.android.chrome");
-            // desiredCapabilities.setCapability("appActivity", "com.google.android.apps.chrome.Main");
-            URL appiumServerUrl = new URL("http://0.0.0.0:4723/wd/hub"); // server url comes in here
-            webDriver = new RemoteWebDriver(appiumServerUrl, desiredCapabilities);
+            desiredCapabilities.setCapability(CapabilityType.BROWSER_NAME, ConfigReader.getProperty("browser")); // type of the browser
+            desiredCapabilities.setCapability("chromedriverExecutableDir",
+                    new File(ConfigReader.getProperty("chromeDriverPath")).getAbsolutePath()); //stores the app path
+
+            // server url comes in here
+            webDriver = new RemoteWebDriver(new URL("http://0.0.0.0:4723/wd/hub"), desiredCapabilities);
             webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-            ///Users/techglobal/IdeaProjects/AutomationFramework/src/test/java/mobile/apps
         }
         return webDriver;
     }
