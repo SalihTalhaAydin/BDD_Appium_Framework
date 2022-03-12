@@ -2,9 +2,10 @@ package stepDefinitions;
 
 import io.appium.java_client.android.AndroidElement;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import utils.MobileCommonUtils;
+import io.cucumber.java.en.When;
 
 
 import java.util.ArrayList;
@@ -106,5 +107,20 @@ public class ApiDemoStepDefinitions {
     @Then("user should see Play Button")
     public void userShouldSeePlayButton() {
         assertTrue(apiDemoCustomEvaluator.playButton.isDisplayed());
+    }
+
+    @When("user scrolls and taps on {string}")
+    public void userScrollsAndTapsOn(String optionText) {
+        scrollAndClick(androidDriver, optionText);
+    }
+
+    @Then("user validates picture is displayed")
+    public void userValidatesPictureIsDisplayed() {
+        assertTrue(apiDemoVerticesPage.image.isDisplayed());
+    }
+
+    @And("user validates title is {string}")
+    public void userValidatesTitleIs(String expectedTitle) {
+        assertEquals(expectedTitle, apiDemoVerticesPage.title.getText());
     }
 }

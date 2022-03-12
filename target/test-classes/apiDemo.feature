@@ -51,3 +51,10 @@ Feature: Api Demo Application
     Given user taps on "Animation"
     When user taps on "Custom Evaluator"
     Then user should see Play Button
+
+  @TapAndScrollToElement
+  Scenario: Tap to Graphics and Scroll to Vertices and Tap to Vertices
+    Given user taps on "Graphics"
+    When user scrolls and taps on "Vertices"
+    Then user validates picture is displayed
+    And user validates title is "Graphics/Vertices"
