@@ -77,3 +77,13 @@ Feature: Api Demo Application
     Then user taps by coordinates 224, 268 on "1. Custom Adapter"
     And user presses for 2 seconds by coordinates 211, 241 to "People Names"
     And user should see "Sample menu"
+
+  @horizontalSwipe
+  Scenario: Swipe horizontally
+    Given user swipes on "App" xStart 81 xEnd 1000, y 542
+
+  @verticalSwipeByCoordinates
+  Scenario: Tap to Graphics and Swipe Down to Vertices By Coordinates
+    Given user taps on "Graphics"
+    When user swipe down by coordinates x 500 yStart 1500 and yEnd 500 and taps on "Vertices"
+    Then user validates picture is displayed

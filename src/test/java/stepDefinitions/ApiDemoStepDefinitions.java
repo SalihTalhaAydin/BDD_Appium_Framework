@@ -22,6 +22,7 @@ public class ApiDemoStepDefinitions {
     String actualViewText;
     List<String> actualAllOptionTexts;
     int actualSize;
+    AndroidElement vertices;
 
     @Given("user gets text of the Accessibility option")
     public void userGetsTextOfTheAccessibilityOption() {
@@ -147,4 +148,24 @@ public class ApiDemoStepDefinitions {
         assertTrue(elementByText(androidDriver, expectedTitle).isDisplayed());
     }
 
+    @Given("user swipes on {string} xStart {int} xEnd {int}, y {int}")
+    public void userSwipesOnXStartXEndY(String optionText, int xStart, int xEnd, int y) {
+        horizontalSwipeByCoordinates(androidDriver, xStart, xEnd, y);
+    }
+
+    @When("user swipe down by coordinates x {int} yStart {int} and yEnd {int} and taps on {string}")
+    public void userSwipeDownByCoordinatesXYStartAndYEndAndTapsOn(int x, int yStart, int yEnd, String optionText) {
+
+        do {
+            verticalSwipeByCoordinates(androidDriver, x, yStart, yEnd);
+            try {
+                vertices = elementByText(androidDriver, optionText);
+            }catch (Exception e){
+                System.out.println("Element is still not located");
+            }
+        }while (vertices == null);
+
+        tapByElement(androidDriver, vertices);
+
+    }
 }
