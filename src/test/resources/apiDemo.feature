@@ -58,3 +58,22 @@ Feature: Api Demo Application
     When user scrolls and taps on "Vertices"
     Then user validates picture is displayed
     And user validates title is "Graphics/Vertices"
+
+  @TapAndValidateMessage
+  Scenario: Tap to Text option and validate details
+    Given user taps on "Text"
+    Then user validates options are displayed
+      | Linkify | LogTextBox | Marquee |
+    And user taps on "LogTextBox"
+    And user taps on "ADD"
+    And user validates the message is "This is a test"
+    And user taps on "DO NOTHING"
+    And user validates the message is "This is a test"
+
+  @classTaskCoordinatesTap
+  Scenario: Long Press element
+    Given user taps by coordinates 88, 1550 on "Views"
+    When user taps by coordinates 184, 1300 on "Expandable Lists"
+    Then user taps by coordinates 224, 268 on "1. Custom Adapter"
+    And user presses for 2 seconds by coordinates 211, 241 to "People Names"
+    And user should see "Sample menu"

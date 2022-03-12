@@ -18,6 +18,12 @@ import static java.time.Duration.ofSeconds;
 
 public class MobileCommonUtils {
 
+    public static void assertTextsOfOptions(DataTable expected, List<AndroidElement> actual){
+        for (int i = 0; i < actual.size(); i++) {
+            Assert.assertEquals(expected.asList().get(i), actual.get(i).getText());
+        }
+    }
+
 
     static int waitOptionsDuration = Integer.parseInt(ConfigReader.getProperty("waitOptionsDuration"));
 

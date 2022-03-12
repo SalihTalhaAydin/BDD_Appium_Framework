@@ -38,9 +38,7 @@ public class ApiDemoStepDefinitions {
 
     @Then("user validates options")
     public void userValidatesOptions(DataTable expectedAllOptionTexts) {
-        for (int i = 0; i < actualAllOptionTexts.size(); i++) {
-            assertEquals(expectedAllOptionTexts.asList().get(i), actualAllOptionTexts.get(i));
-        }
+        assertTextsOfOptions(expectedAllOptionTexts, apiDemoHomePage.allOptions);
     }
 
     @Given("user gets all elements with className")
@@ -123,4 +121,30 @@ public class ApiDemoStepDefinitions {
     public void userValidatesTitleIs(String expectedTitle) {
         assertEquals(expectedTitle, apiDemoVerticesPage.title.getText());
     }
+
+    @Then("user validates options are displayed")
+    public void userValidatesOptionsAreDisplayed(DataTable expectedOptionTexts) {
+        assertTextsOfOptions(expectedOptionTexts, apiDemoTextPage.textOptions);
+    }
+
+    @And("user validates the message is {string}")
+    public void userValidatesTheMessageIs(String expectedMessage) {
+        assertEquals(expectedMessage, apiDemoLogTextBoxPage.logTexts.getText().trim());
+    }
+
+    @Given("user taps by coordinates {int}, {int} on {string}")
+    public void userTapsByCoordinatesOn(int x, int y, String optionText) {
+        tapByCoordinates(androidDriver, x, y);
+    }
+
+    @And("user presses for {int} seconds by coordinates {int}, {int} to {string}")
+    public void userPressesForSecondsByCoordinatesTo(int seconds, int x, int y, String optionText) {
+        pressByCoordinates(androidDriver, x, y, seconds);
+    }
+
+    @And("user should see {string}")
+    public void userShouldSee(String expectedTitle) {
+        assertTrue(elementByText(androidDriver, expectedTitle).isDisplayed());
+    }
+
 }
