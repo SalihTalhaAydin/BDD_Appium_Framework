@@ -14,6 +14,7 @@ public class Hooks {
     public static AndroidDriver<AndroidElement> androidDriver;
     public static WebDriver webDriver;
 
+    //Native App Pages
     public static ApiDemoHomePage apiDemoHomePage;
     public static ApiDemoGraphicsPage apiDemoGraphicsPage;
     public static ApiDemoCustomEvaluator apiDemoCustomEvaluator;
@@ -21,9 +22,13 @@ public class Hooks {
     public static ApiDemoTextPage apiDemoTextPage;
     public static ApiDemoLogTextBoxPage apiDemoLogTextBoxPage;
 
+    //Web App Pages
+    public static MobileAmazonHomePage mobileAmazonHomePage;
+    public static MobileEbayHomePage mobileEbayHomePage;
+
     @Before
-    public void setup() throws Exception{
-        switch (ConfigReader.getProperty("testing")){
+    public void setup() throws Exception {
+        switch (ConfigReader.getProperty("testing")) {
             case "app":
                 androidDriver = DesiredCapabilitiesUtils.setupAndroidDesiredCapabilities();
                 apiDemoHomePage = new ApiDemoHomePage(androidDriver);
@@ -35,7 +40,8 @@ public class Hooks {
                 break;
             case "browser":
                 webDriver = DesiredCapabilitiesUtils.setupWebDriverDesiredCapabilities();
-
+                mobileAmazonHomePage = new MobileAmazonHomePage(webDriver);
+                mobileEbayHomePage = new MobileEbayHomePage(webDriver);
                 break;
             default:
                 throw new Exception("Testing value does NOT come from configuration.properties!");
@@ -44,7 +50,7 @@ public class Hooks {
     }
 
     @After
-    public void tearDown(){
+    public void tearDown() {
         DesiredCapabilitiesUtils.quitDriver();
     }
 }
